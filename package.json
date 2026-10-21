@@ -12,6 +12,13 @@
   "bugs": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp/issues"
   },
+  "main": "index.js",
+  "bin": {
+    "diogenes-web3-security-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
   "keywords": [
     "mcp",
     "mcp-server",
