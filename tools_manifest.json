@@ -2,7 +2,7 @@
   {
     "name": "audit_smart_contract_code",
     "title": "EVM & Move Smart Contract Honeypot, Tax & Reentrancy Auditor",
-    "description": "Statically audits Solidity, Vyper, or Move smart contract source code for honeypot transfer taxes, hidden mint backdoors, proxy upgrade traps, and reentrancy. Use when auditing smart contract source code or bytecode before deploying or interacting with a protocol; for scanning Solana Anchor/Rust programs specifically for Cross-Program Invocation (CPI) signer/account vulnerabilities, use scan_solana_cpi_reentrancy instead. Read-only edge call (32 KB, 60 RPM): accepts 'code_or_address' ('chain' defaults to 'evm_solidity'), uses '?demo=true' or L402 (250 sats); HTTP 400 if invalid.",
+    "description": "Statically audits Solidity, Vyper, or Move smart contract source code for honeypot transfer taxes, hidden mint backdoors, proxy upgrade traps, and reentrancy. Use when auditing smart contract source code or bytecode before deploying or interacting with a protocol; for scanning Solana Anchor/Rust programs specifically for Cross-Program Invocation (CPI) signer/account vulnerabilities, use scan_solana_cpi_reentrancy instead. Read-only edge call (32 KB, 60 RPM): accepts 'code_or_address' ('chain' defaults to 'evm_solidity'), uses '?demo=true' or L402 (45 sats); HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -64,7 +64,7 @@
   {
     "name": "scan_solana_cpi_reentrancy",
     "title": "Solana Anchor & Rust Cross-Program Invocation (CPI) Vulnerability Scanner",
-    "description": "Scans Solana Anchor and native Rust program instructions for unverified Cross-Program Invocation (CPI) program IDs, missing signer checks, and PDA bump seed canonicalization bugs. Use when auditing Solana Rust/Anchor source code or instruction account structs for CPI privilege escalation; for checking live SPL token mint/freeze authorities and rug-pull risk by mint address, use evaluate_solana_token_risk instead. Read-only edge call (32 KB, 60 RPM): accepts 'rust_source_or_idl' ('framework' defaults to 'anchor'), uses '?demo=true' or L402 (160 sats); HTTP 400 if invalid.",
+    "description": "Scans Solana Anchor and native Rust program instructions for unverified Cross-Program Invocation (CPI) program IDs, missing signer checks, and PDA bump seed canonicalization bugs. Use when auditing Solana Rust/Anchor source code or instruction account structs for CPI privilege escalation; for checking live SPL token mint/freeze authorities and rug-pull risk by mint address, use evaluate_solana_token_risk instead. Read-only edge call (32 KB, 60 RPM): accepts 'rust_source_or_idl' ('framework' defaults to 'anchor'), uses '?demo=true' or L402 (30 sats); HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -125,7 +125,7 @@
   {
     "name": "evaluate_solana_token_risk",
     "title": "Solana SPL Token Mint/Freeze Authority & Rug-Pull Risk Evaluator",
-    "description": "Evaluates a Solana SPL token's rug-pull probability by checking active mint authority, freeze authority, mutable metadata, and top-holder concentration. Use when making a pre-trade security decision on whether a Solana SPL token is safe to buy; for retrieving SPL token symbol, decimals, and DEX liquidity pool metadata via x402, use inspect_solana_token_liquidity instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'token_address' ('risk_profile' defaults to 'strict_decentralized'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "description": "Evaluates a Solana SPL token's rug-pull probability by checking active mint authority, freeze authority, mutable metadata, and top-holder concentration. Use when making a pre-trade security decision on whether a Solana SPL token is safe to buy; for retrieving SPL token symbol, decimals, and DEX liquidity pool metadata via x402, use inspect_solana_token_liquidity instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'token_address' ('risk_profile' defaults to 'strict_decentralized'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -186,7 +186,7 @@
   {
     "name": "inspect_solana_token_liquidity",
     "title": "Solana SPL Token Metadata, Decimals & Authority Registry Lookup",
-    "description": "Retrieves canonical Solana SPL token metadata including name, ticker symbol, decimal precision, and current mint/freeze authority addresses. Use when resolving SPL token decimals, ticker symbols, and registry metadata for portfolio or swap formatting; for computing a composite security risk score and binary should_transact verdict, use evaluate_solana_token_risk instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'mint' ('network' defaults to 'mainnet-beta'), supports '?demo=true' or x402 (200 sats), and returns HTTP 400 if invalid.",
+    "description": "Retrieves canonical Solana SPL token metadata including name, ticker symbol, decimal precision, and current mint/freeze authority addresses. Use when resolving SPL token decimals, ticker symbols, and registry metadata for portfolio or swap formatting; for computing a composite security risk score and binary should_transact verdict, use evaluate_solana_token_risk instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'mint' ('network' defaults to 'mainnet-beta'), supports '?demo=true' or x402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -246,7 +246,7 @@
   {
     "name": "track_solana_whale_flows",
     "title": "Solana Whale Wallet Net-Flow & Insider Cluster Tracker",
-    "description": "Tracks 24-hour net accumulation or distribution flows across top Solana whale wallets and flags coordinated insider wallet clusters for a given SPL token. Use when analyzing on-chain smart-money order flow and holder clustering on Solana; for checking static SPL contract mint/freeze authority permissions, use evaluate_solana_token_risk instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'token' ('window' defaults to '1h'), supports '?demo=true' or x402 (500 sats), and returns HTTP 400 if invalid.",
+    "description": "Tracks 24-hour net accumulation or distribution flows across top Solana whale wallets and flags coordinated insider wallet clusters for a given SPL token. Use when analyzing on-chain smart-money order flow and holder clustering on Solana; for checking static SPL contract mint/freeze authority permissions, use evaluate_solana_token_risk instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'token' ('window' defaults to '1h'), supports '?demo=true' or x402 (50 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -308,7 +308,7 @@
   {
     "name": "estimate_solana_priority_fees",
     "title": "Solana Compute-Unit Priority Fee & Jito MEV Tip Estimator",
-    "description": "Calculates optimal Solana compute-unit (CU) microlamport priority fees and Jito bundle tip lamports to achieve target block-inclusion probability. Use when setting SetComputeUnitPrice and Jito tips before broadcasting a Solana transaction; for querying Bitcoin L1 sat/vB mempool fee rates, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'priority_level' ('tx_type' defaults to 'simple_transfer'), supports '?demo=true' or x402 (50 sats), and returns HTTP 400 if invalid.",
+    "description": "Calculates optimal Solana compute-unit (CU) microlamport priority fees and Jito bundle tip lamports to achieve target block-inclusion probability. Use when setting SetComputeUnitPrice and Jito tips before broadcasting a Solana transaction; for querying Bitcoin L1 sat/vB mempool fee rates, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'priority_level' ('tx_type' defaults to 'simple_transfer'), supports '?demo=true' or x402 (10 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -376,7 +376,7 @@
   {
     "name": "decode_eip712_permit_signature",
     "title": "EIP-712 Typed Data & Uniswap Permit2 Phishing Signature Decoder",
-    "description": "Decodes EIP-712 and Uniswap Permit2 off-chain typed-data payloads to verify spender identity, detect unlimited (uint256.max) token approvals, and flag expired deadlines. Use when inspecting an off-chain eth_signTypedData_v4 or Permit2 payload before signing; for decoding raw on-chain hex transaction calldata (0x...) for eth_sendTransaction, use simulate_evm_transaction_calldata instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'typed_data_json' ('chain_id' defaults to '1'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "description": "Decodes EIP-712 and Uniswap Permit2 off-chain typed-data payloads to verify spender identity, detect unlimited (uint256.max) token approvals, and flag expired deadlines. Use when inspecting an off-chain eth_signTypedData_v4 or Permit2 payload before signing; for decoding raw on-chain hex transaction calldata (0x...) for eth_sendTransaction, use simulate_evm_transaction_calldata instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'typed_data_json' ('chain_id' defaults to '1'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -438,7 +438,7 @@
   {
     "name": "simulate_evm_transaction_calldata",
     "title": "Pre-Sign EVM Hex Calldata Selector Decoder & Drain Simulator",
-    "description": "Decodes raw EVM hexadecimal transaction calldata (0x...) by 4-byte function selector to expose hidden ERC-20 approve/transferFrom calls, setApprovalForAll drains, and multicall bundles. Use when auditing raw hex transaction data (to, value, data) before broadcasting an on-chain EVM transaction; for inspecting off-chain EIP-712 JSON typed-data signatures, use decode_eip712_permit_signature instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'calldata_hex' ('network' defaults to 'base_mainnet'), supports '?demo=true' or L402 (90 sats), and returns HTTP 400 if invalid.",
+    "description": "Decodes raw EVM hexadecimal transaction calldata (0x...) by 4-byte function selector to expose hidden ERC-20 approve/transferFrom calls, setApprovalForAll drains, and multicall bundles. Use when auditing raw hex transaction data (to, value, data) before broadcasting an on-chain EVM transaction; for inspecting off-chain EIP-712 JSON typed-data signatures, use decode_eip712_permit_signature instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'calldata_hex' ('network' defaults to 'base_mainnet'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -500,7 +500,7 @@
   {
     "name": "evaluate_dex_mev_risk",
     "title": "Pre-Swap DEX MEV Sandwich & Frontrunning Risk Evaluator",
-    "description": "Evaluates decentralized exchange (DEX) swap parameters against pool depth and mempool visibility to quantify MEV sandwich risk and compute optimal slippage tolerance in basis points. Use when configuring slippage tolerance and private-RPC routing before executing an on-chain DEX token swap; for comparing cross-chain bridge settlement routes across different L1 blockchains, use compare_crosschain_bridge_routes instead. Read-only edge call (32 KB, 60 RPM): accepts 'pair' ('execution_venue' defaults to 'uniswap_v3_public'), uses '?demo=true' or L402 (150 sats); HTTP 400 if invalid.",
+    "description": "Evaluates decentralized exchange (DEX) swap parameters against pool depth and mempool visibility to quantify MEV sandwich risk and compute optimal slippage tolerance in basis points. Use when configuring slippage tolerance and private-RPC routing before executing an on-chain DEX token swap; for comparing cross-chain bridge settlement routes across different L1 blockchains, use compare_crosschain_bridge_routes instead. Read-only edge call (32 KB, 60 RPM): accepts 'pair' ('execution_venue' defaults to 'uniswap_v3_public'), uses '?demo=true' or L402 (25 sats); HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -562,7 +562,7 @@
   {
     "name": "detect_address_poisoning_scam",
     "title": "Counterparty Address Poisoning & Vanity Prefix/Suffix Spoof Detector",
-    "description": "Compares a target recipient wallet address against recent transaction history to detect vanity prefix/suffix lookalike spoofing and zero-value dusting attacks. Use when verifying a recipient EVM or Solana wallet address before sending funds; for decoding hex smart contract calldata payloads, use simulate_evm_transaction_calldata instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'target_address' ('address_standard' defaults to 'auto_detect'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "description": "Compares a target recipient wallet address against recent transaction history to detect vanity prefix/suffix lookalike spoofing and zero-value dusting attacks. Use when verifying a recipient EVM or Solana wallet address before sending funds; for decoding hex smart contract calldata payloads, use simulate_evm_transaction_calldata instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'target_address' ('address_standard' defaults to 'auto_detect'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -623,7 +623,7 @@
   {
     "name": "verify_http402_payment_challenge",
     "title": "Pre-Payment HTTP 402 (L402 / x402 / MPP) Invoice & Macaroon Fraud Verifier",
-    "description": "Decodes inbound HTTP 402 Payment Required challenges (L402 BOLT11 + Macaroon, x402 Solana USDC, MPP Base intents) to verify cryptographic payment-hash binding and block overcharge fraud. Use when auditing a 402 challenge header before an autonomous agent pays a Lightning invoice or USDC transfer; for checking on-chain Bitcoin L1 mempool feerates, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'www_authenticate' ('protocol_hint' defaults to 'L402'), supports '?demo=true' or L402 (60 sats), and returns HTTP 400 if invalid.",
+    "description": "Decodes inbound HTTP 402 Payment Required challenges (L402 BOLT11 + Macaroon, x402 Solana USDC, MPP Base intents) to verify cryptographic payment-hash binding and block overcharge fraud. Use when auditing a 402 challenge header before an autonomous agent pays a Lightning invoice or USDC transfer; for checking on-chain Bitcoin L1 mempool feerates, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'www_authenticate' ('protocol_hint' defaults to 'L402'), supports '?demo=true' or L402 (15 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -684,7 +684,7 @@
   {
     "name": "estimate_bitcoin_mempool_fees",
     "title": "Bitcoin Mainnet Mempool Feerate Estimator (sat/vB)",
-    "description": "Fetches real-time Bitcoin mainnet mempool feerate recommendations in satoshis per virtual byte (sat/vB) across fastest, half-hour, hour, and economy confirmation tiers. Use when checking current Bitcoin L1 network congestion before broadcasting an on-chain BTC transaction; for calculating exact SegWit/Taproot UTXO batch consolidation vByte weights and dust thresholds, use plan_bitcoin_utxo_consolidation instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'confirmation_target', supports '?demo=true' or L402 (50 sats), and returns HTTP 400 if invalid.",
+    "description": "Fetches real-time Bitcoin mainnet mempool feerate recommendations in satoshis per virtual byte (sat/vB) across fastest, half-hour, hour, and economy confirmation tiers. Use when checking current Bitcoin L1 network congestion before broadcasting an on-chain BTC transaction; for calculating exact SegWit/Taproot UTXO batch consolidation vByte weights and dust thresholds, use plan_bitcoin_utxo_consolidation instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'confirmation_target', supports '?demo=true' or L402 (10 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -740,7 +740,7 @@
   {
     "name": "plan_bitcoin_utxo_consolidation",
     "title": "Bitcoin SegWit/Taproot UTXO Dust Consolidation & Fee-Window Planner",
-    "description": "Analyzes a set of Bitcoin UTXO balances in satoshis to compute exact vByte transaction weight, identify uneconomical dust inputs, and recommend whether to consolidate now or hold. Use when optimizing on-chain Bitcoin treasury UTXO sets to minimize long-term miner fee drag; for fetching current live Bitcoin mempool sat/vB feerates alone, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'utxos_sats_json' ('script_type' defaults to 'p2wpkh_segwit'), supports '?demo=true' or L402 (80 sats), and returns HTTP 400 if invalid.",
+    "description": "Analyzes a set of Bitcoin UTXO balances in satoshis to compute exact vByte transaction weight, identify uneconomical dust inputs, and recommend whether to consolidate now or hold. Use when optimizing on-chain Bitcoin treasury UTXO sets to minimize long-term miner fee drag; for fetching current live Bitcoin mempool sat/vB feerates alone, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'utxos_sats_json' ('script_type' defaults to 'p2wpkh_segwit'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -801,7 +801,7 @@
   {
     "name": "calculate_spot_swap_rate",
     "title": "Cross-Asset Spot Exchange Rate & Satoshi Conversion Calculator",
-    "description": "Calculates instantaneous spot exchange rates and equivalent USD, BTC, and satoshi values across BTC, ETH, SOL, SUI, and USDC. Use when converting a token amount into USD or satoshis for invoice pricing or accounting; for quoting executable non-KYC cross-chain bridge routes with bridge fees and settlement times, use compare_crosschain_bridge_routes instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'currency' ('amount' defaults to 'standard'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "description": "Calculates instantaneous spot exchange rates and equivalent USD, BTC, and satoshi values across BTC, ETH, SOL, SUI, and USDC. Use when converting a token amount into USD or satoshis for invoice pricing or accounting; for quoting executable non-KYC cross-chain bridge routes with bridge fees and settlement times, use compare_crosschain_bridge_routes instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'currency' ('amount' defaults to 'standard'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -864,7 +864,7 @@
   {
     "name": "compare_crosschain_bridge_routes",
     "title": "Non-KYC Cross-Chain Bridge Route & Settlement Fee Comparator",
-    "description": "Compares non-custodial, non-KYC cross-chain swap routes (THORChain native L1 swaps, Maya Protocol, Blockstream Liquid) by basis-point fee, net output sats, and settlement time. Use when routing cross-chain treasury settlements (e.g. Solana USDC or Base ETH into native Bitcoin); for calculating mid-market spot exchange rates without bridge routing fees, use calculate_spot_swap_rate instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'from_asset' ('to_asset' defaults to 'BTC_NATIVE'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "description": "Compares non-custodial, non-KYC cross-chain swap routes (THORChain native L1 swaps, Maya Protocol, Blockstream Liquid) by basis-point fee, net output sats, and settlement time. Use when routing cross-chain treasury settlements (e.g. Solana USDC or Base ETH into native Bitcoin); for calculating mid-market spot exchange rates without bridge routing fees, use calculate_spot_swap_rate instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'from_asset' ('to_asset' defaults to 'BTC_NATIVE'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
