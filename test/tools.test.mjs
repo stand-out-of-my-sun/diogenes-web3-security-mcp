@@ -48,6 +48,13 @@ test("Audit tool schema & hints: evaluate_solana_token_risk", () => {
   assert.ok(tool.description && tool.description.length > 20);
   assert.equal(typeof tool.inputSchema, "object");
   assert.equal(tool.inputSchema.type, "object");
+  assert.ok(tool.inputSchema.properties.risk_profile);
+  assert.deepEqual(tool.inputSchema.properties.risk_profile.enum, ["strict_decentralized", "allow_regulated_stablecoins", "memecoin_sniping"]);
+  assert.ok(tool.outputSchema);
+  assert.ok(tool.outputSchema.properties.reason_codes);
+  assert.ok(tool.outputSchema.properties.token_standard);
+  assert.ok(tool.outputSchema.properties.token_2022_extensions);
+  assert.ok(tool.outputSchema.properties.slot);
   assert.ok(tool.annotations);
   assert.equal(typeof tool.annotations.readOnlyHint, "boolean");
   assert.equal(typeof tool.annotations.destructiveHint, "boolean");
