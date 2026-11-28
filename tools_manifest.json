@@ -125,7 +125,7 @@
   {
     "name": "evaluate_solana_token_risk",
     "title": "Solana SPL Token Mint/Freeze Authority & Rug-Pull Risk Evaluator",
-    "description": "Evaluates a Solana SPL token's rug-pull probability by checking active mint authority, freeze authority, mutable metadata, and top-holder concentration. Use when making a pre-trade security decision on whether a Solana SPL token is safe to buy; for retrieving SPL token symbol, decimals, and DEX liquidity pool metadata via x402, use inspect_solana_token_liquidity instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'token_address' ('risk_profile' defaults to 'strict_decentralized'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
+    "description": "Evaluates Solana SPL and Token-2022 rug-pull risk by checking mint/freeze authorities, permanent delegates, transfer hooks, and returning reason codes with slot height. Use when making a pre-trade security decision on whether an SPL or Token-2022 mint is safe to trade; for DEX liquidity and metadata lookup via x402, use inspect_solana_token_liquidity instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'token_address' ('risk_profile' defaults to 'strict_decentralized'), supports '?demo=true' or L402 (20 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -166,13 +166,60 @@
         "freeze_authority_present": {
           "type": "boolean",
           "description": "True if an active authority can freeze holder token accounts."
+        },
+        "reason_codes": {
+          "type": "array",
+          "description": "Programmatic risk verdicts and reason codes (e.g. REGULATED_STABLECOIN_FREEZE_AUTHORITY, TOKEN_2022_PERMANENT_DELEGATE).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slot": {
+          "type": "number",
+          "description": "Solana block slot at which the on-chain mint and authority state was verified."
+        },
+        "token_standard": {
+          "type": "string",
+          "description": "Identified Solana token program standard ('spl-token', 'token-2022', or 'native-sol')."
+        },
+        "token_2022_extensions": {
+          "type": "object",
+          "description": "Detected Token-2022 extensions including permanent delegate, transfer hook, default frozen, and transfer fees.",
+          "properties": {
+            "permanent_delegate_present": {
+              "type": "boolean",
+              "description": "True if a Token-2022 permanent delegate can arbitrarily transfer or burn holder tokens."
+            },
+            "transfer_hook_present": {
+              "type": "boolean",
+              "description": "True if an external transfer hook program executes on every transfer."
+            },
+            "transfer_fee_active": {
+              "type": "boolean",
+              "description": "True if transfer fee extension withholds tokens on transfer."
+            },
+            "default_account_frozen": {
+              "type": "boolean",
+              "description": "True if new token accounts are initialized in frozen state by default."
+            }
+          },
+          "required": [
+            "permanent_delegate_present",
+            "transfer_hook_present",
+            "transfer_fee_active",
+            "default_account_frozen"
+          ]
         }
       },
       "required": [
         "valid_base58",
         "risk_score",
         "should_transact",
-        "freeze_authority_present"
+        "freeze_authority_present",
+        "reason_codes",
+        "slot",
+        "token_standard",
+        "token_2022_extensions"
       ]
     },
     "annotations": {
@@ -433,7 +480,11 @@
       "destructiveHint": false,
       "idempotentHint": true,
       "openWorldHint": false
-    }
+    },
+    "free_tier": true,
+    "price_sats": 0,
+    "priceSats": 0,
+    "price_usd": 0.0
   },
   {
     "name": "simulate_evm_transaction_calldata",
@@ -495,7 +546,11 @@
       "destructiveHint": false,
       "idempotentHint": true,
       "openWorldHint": false
-    }
+    },
+    "free_tier": true,
+    "price_sats": 0,
+    "priceSats": 0,
+    "price_usd": 0.0
   },
   {
     "name": "evaluate_dex_mev_risk",
@@ -618,7 +673,11 @@
       "destructiveHint": false,
       "idempotentHint": true,
       "openWorldHint": false
-    }
+    },
+    "free_tier": true,
+    "price_sats": 0,
+    "priceSats": 0,
+    "price_usd": 0.0
   },
   {
     "name": "verify_http402_payment_challenge",
@@ -679,7 +738,11 @@
       "destructiveHint": false,
       "idempotentHint": true,
       "openWorldHint": false
-    }
+    },
+    "free_tier": true,
+    "price_sats": 0,
+    "priceSats": 0,
+    "price_usd": 0.0
   },
   {
     "name": "estimate_bitcoin_mempool_fees",
@@ -796,7 +859,11 @@
       "destructiveHint": false,
       "idempotentHint": true,
       "openWorldHint": false
-    }
+    },
+    "free_tier": true,
+    "price_sats": 0,
+    "priceSats": 0,
+    "price_usd": 0.0
   },
   {
     "name": "calculate_spot_swap_rate",
@@ -859,7 +926,11 @@
       "destructiveHint": false,
       "idempotentHint": true,
       "openWorldHint": false
-    }
+    },
+    "free_tier": true,
+    "price_sats": 0,
+    "priceSats": 0,
+    "price_usd": 0.0
   },
   {
     "name": "compare_crosschain_bridge_routes",
